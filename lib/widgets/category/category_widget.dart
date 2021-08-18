@@ -32,7 +32,7 @@ class CategoryWidget extends StatelessWidget {
                                         idcategory: category.id,
                                         namecategory: category.name,
                                       )));
-                          print(category.id.toString());
+                          // print(category.id.toString());
                         },
                         child: Column(
                           children: [

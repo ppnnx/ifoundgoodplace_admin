@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ifgpadmin/models/user_model.dart';
 import 'package:ifgpadmin/service/user_api.dart';
-import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:http/http.dart' as http;
 
 class UserWidget extends StatefulWidget {
@@ -40,42 +39,9 @@ class _UserWidgetState extends State<UserWidget> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                // avatar
-                                // user.image == null || user.image == " "
-                                //     ? CircleAvatar(
-                                //         radius: 30,
-                                //         backgroundImage:
-                                //             AssetImage('assets/second.png'),
-                                //       )
-                                //     : ClipRRect(
-                                //         borderRadius:
-                                //             BorderRadius.circular(10000.0),
-                                //         child: CachedNetworkImage(
-                                //           imageUrl:
-                                //               'http://35.213.159.134/avatar/${user.image}',
-                                //           width: 60,
-                                //           height: 60,
-                                //           fit: BoxFit.cover,
-                                //           placeholder: (context, url) {
-                                //             return Center(
-                                //               child:
-                                //                   CircularProgressIndicator(),
-                                //             );
-                                //           },
-                                //           errorWidget: (context, url, error) {
-                                //             return CircleAvatar(
-                                //               backgroundColor: Colors.black12,
-                                //               child: Icon(
-                                //                 Icons.error,
-                                //                 color: Colors.red,
-                                //               ),
-                                //             );
-                                //           },
-                                //         ),
-                                //       ),
                                 SizedBox(width: 10),
                                 // name + status
-                                user.status == "Active"
+                                user.status == "active"
                                     ? Container(
                                         padding: EdgeInsets.only(
                                             left: 8,
@@ -188,7 +154,7 @@ class _UserWidgetState extends State<UserWidget> {
                                 ),
                               ),
                               SizedBox(width: 16),
-                              user.status == "Active"
+                              user.status == "active"
                                   ? ElevatedButton(
                                       onPressed: () async {
                                         final url = Uri.parse(

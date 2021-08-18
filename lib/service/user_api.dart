@@ -14,17 +14,10 @@ class APIUser {
         final List user = json.decode(response.body);
 
         return user.map((json) => User.fromJson(json)).toList();
+      } else {
+        throw Exception('Failed!');
       }
     } catch (e) {}
-
-    // print(response.body);
-
-    // final List user = json.decode(response.body);
-    // user.forEach((element) {
-    //   Map obj = element;
-    //   String username = obj['Username'];
-    //   print(username);
-
-    // });
+    return null;
   }
 }

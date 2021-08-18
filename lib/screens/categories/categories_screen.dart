@@ -9,6 +9,7 @@ class CatergoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       body: SafeArea(
+        maintainBottomViewPadding: true,
         child: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,

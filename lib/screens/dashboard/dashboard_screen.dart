@@ -1,13 +1,12 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ifgpadmin/screens/categories/categories_screen.dart';
 import 'package:ifgpadmin/screens/contents/contents_screen.dart';
 import 'package:ifgpadmin/screens/login/login_screen.dart';
+import 'package:ifgpadmin/screens/rank/rank_screen.dart';
 import 'package:ifgpadmin/screens/users/users_screen.dart';
 import 'package:http/http.dart' as http;
+import 'package:ifgpadmin/service/report_api.dart';
 import 'package:ifgpadmin/widgets/report/report_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -77,15 +76,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           ListTile(
             leading: Icon(
-              CupertinoIcons.rocket_fill,
+              CupertinoIcons.square_arrow_right,
               color: Colors.black,
+              size: 19,
             ),
             title: Text(
-              'logout',
+              'Logout',
               style: TextStyle(color: Colors.black),
             ),
             onTap: () {
-              print('logout');
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => LoginScreen()));
             },
@@ -142,7 +141,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => CatergoryScreen())),
-                  )
+                  ),
+                  InkWell(
+                    child: buildCardRanking(),
+                    onTap: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => RankScreen()));
+                    },
+                  ),
                 ],
               ),
             ),
@@ -268,7 +274,40 @@ class _DashboardScreenState extends State<DashboardScreen> {
               child: Container(
             padding: EdgeInsets.symmetric(vertical: 24.0),
             child: Text(
-              '11',
+              '12',
+              style: TextStyle(color: Colors.black, fontSize: 24),
+            ),
+          ))
+        ],
+      ),
+    );
+  }
+
+  Widget buildCardRanking() {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black.withOpacity(0.7)),
+        color: Colors.white,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              left: 10.0,
+              right: 10.0,
+              top: 28.0,
+            ),
+            child: Text(
+              'rank',
+              style: TextStyle(color: Colors.black, fontSize: 20),
+            ),
+          ),
+          Center(
+              child: Container(
+            padding: EdgeInsets.symmetric(vertical: 24.0),
+            child: Text(
+              '3',
               style: TextStyle(color: Colors.black, fontSize: 24),
             ),
           ))

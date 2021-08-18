@@ -47,12 +47,6 @@ class ReportWidget extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                // Icon(
-                                //   CupertinoIcons.exclamationmark_circle,
-                                //   color: Colors.black,
-                                //   size: 20,
-                                // ),
-                                // SizedBox(width: 10),
                                 Text(
                                   report.title,
                                   style: TextStyle(
@@ -72,14 +66,14 @@ class ReportWidget extends StatelessWidget {
                                       children: [
                                         Icon(
                                           CupertinoIcons.bolt_circle_fill,
-                                          color: Colors.blue.shade800,
+                                          color: Colors.amber,
                                           size: 18,
                                         ),
                                         SizedBox(width: 5),
                                         Text(
                                           'Waiting for review',
                                           style: TextStyle(
-                                            color: Colors.blue.shade800,
+                                            color: Colors.amber,
                                             fontSize: 14,
                                           ),
                                         ),
@@ -88,21 +82,48 @@ class ReportWidget extends StatelessWidget {
                                   )
                                 : Container(
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
                                       children: [
-                                        Icon(
-                                          CupertinoIcons
-                                              .checkmark_alt_circle_fill,
-                                          color: Colors.green.shade400,
-                                          size: 19,
+                                        // already checked
+                                        Container(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Icon(
+                                                CupertinoIcons
+                                                    .checkmark_alt_circle_fill,
+                                                color: Colors.blue.shade900,
+                                                size: 19,
+                                              ),
+                                              SizedBox(width: 5),
+                                              Text(
+                                                'Already checked',
+                                                style: TextStyle(
+                                                  color: Colors.blue.shade900,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          'Already checked',
-                                          style: TextStyle(
-                                            color: Colors.green.shade400,
-                                            fontSize: 14,
+                                        SizedBox(width: 16),
+                                        // status content
+                                        Container(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Icon(
+                                                CupertinoIcons.capsule_fill,
+                                                color: report.statusContent ==
+                                                        "posted"
+                                                    ? Colors.green.shade600
+                                                    : Colors.red.shade800,
+                                                size: 19,
+                                              ),
+                                              SizedBox(width: 5),
+                                              //  
+                                            ],
                                           ),
                                         ),
                                       ],

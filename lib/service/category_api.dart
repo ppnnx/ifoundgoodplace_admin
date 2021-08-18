@@ -5,7 +5,7 @@ import 'package:ifgpadmin/models/category_model.dart';
 
 class APICategory {
   static Future<List<CategoryModel>> getCategory() async {
-    var url = Uri.parse('http://35.213.159.134/category.php?plus');
+    var url = Uri.parse('http://35.213.159.134/totalctbycate.php?plus');
     var response = await http.get(url);
 
     if (response.statusCode == 200) {
