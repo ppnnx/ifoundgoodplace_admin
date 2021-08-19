@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ifgpadmin/widgets/user/user_nd_widget.dart';
-import 'package:ifgpadmin/widgets/user/user_test_widget.dart';
 import 'package:ifgpadmin/widgets/user/user_top_widget.dart';
-import 'package:ifgpadmin/widgets/user/user_widget.dart';
 
 class UserScreen extends StatelessWidget {
   @override

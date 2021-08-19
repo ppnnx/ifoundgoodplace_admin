@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ifgpadmin/models/content_model.dart';
-import 'package:ifgpadmin/screens/detail/detail_screen.dart';
+
+import '../detail/detail_screen.dart';
 
 class ContentinCategory extends StatefulWidget {
   final idcategory;
