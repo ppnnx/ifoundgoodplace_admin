@@ -8,16 +8,15 @@ class User {
   String createdate;
   String email;
 
-  User({
-    this.iduser,
-    this.username,
-    this.image,
-    this.status,
-    this.follower,
-    this.following,
-    this.createdate,
-    this.email,
-  });
+  User(
+      {this.iduser,
+      this.username,
+      this.image,
+      this.status,
+      this.follower,
+      this.following,
+      this.createdate,
+      this.email});
 
   User.fromJson(Map<String, dynamic> json) {
     iduser = json['ID_User'];

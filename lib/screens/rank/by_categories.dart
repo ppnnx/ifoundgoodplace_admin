@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:ifgpadmin/models/content_model.dart';
+import 'package:ifgpadmin/screens/detail/detail_screen.dart';
 
 class ByCategoryScreen extends StatefulWidget {
   final idcategory;
@@ -70,9 +71,19 @@ class _ByCategoryScreenState extends State<ByCategoryScreen> {
                         shrinkWrap: true,
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext _, int index) {
-                          return ChartWidget(
-                            rank: index + 1,
-                            data: snapshot.data[index],
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DetailScreen(
+                                            contentModel: snapshot.data[index],
+                                          )));
+                            },
+                            child: ChartWidget(
+                              rank: index + 1,
+                              data: snapshot.data[index],
+                            ),
                           );
                         });
                   }

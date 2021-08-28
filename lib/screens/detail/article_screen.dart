@@ -3,21 +3,21 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ifgpadmin/models/content_model.dart';
+import 'package:ifgpadmin/models/mycontent_model.dart';
 import 'package:ifgpadmin/screens/map/map_screen.dart';
 import 'package:ifgpadmin/widgets/comment/comment_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DetailScreen extends StatefulWidget {
-  final ContentModel contentModel;
+class ArticleScreen extends StatefulWidget {
+  final MyContentModel myContentModel;
 
-  const DetailScreen({Key key, this.contentModel}) : super(key: key);
+  const ArticleScreen({Key key, this.myContentModel}) : super(key: key);
 
   @override
-  _DetailScreenState createState() => _DetailScreenState();
+  _ArticleScreenState createState() => _ArticleScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class _ArticleScreenState extends State<ArticleScreen> {
   int _current = 0;
 
   // for link
@@ -33,7 +33,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final content = widget.contentModel;
+    final mycontent = widget.myContentModel;
 
     return Scaffold(
       appBar: AppBar(
@@ -54,21 +54,21 @@ class _DetailScreenState extends State<DetailScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // part 1 :
+                // part 1
                 Container(
                   padding: EdgeInsets.all(21.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        content.dateContent,
+                        mycontent.datecontent,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       Text(
-                        content.username,
+                        mycontent.username,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
@@ -86,7 +86,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                         ),
                         child: Text(
-                          content.category.toLowerCase(),
+                          mycontent.category.toLowerCase(),
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 13,
@@ -98,24 +98,24 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 SizedBox(height: 100),
 
-                // part 2 :
+                // part 2
                 Container(
                   padding: EdgeInsets.all(21.0),
                   child: Text(
-                    content.title,
+                    mycontent.title,
                     style: TextStyle(fontFamily: 'Kanit', fontSize: 24),
                   ),
                 ),
 
                 // images
-                showimages(content),
+                showimages(mycontent),
                 SizedBox(height: 60),
 
                 // story
                 Container(
                   padding: EdgeInsets.all(21.0),
                   child: Text(
-                    content.content,
+                    mycontent.content,
                     style: TextStyle(color: Colors.black, fontSize: 16),
                   ),
                 ),
@@ -133,9 +133,9 @@ class _DetailScreenState extends State<DetailScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => MapScreen(
-                                        lat: content.latitude,
-                                        lng: content.longitude,
-                                        title: content.title,
+                                        lat: mycontent.latitude,
+                                        lng: mycontent.longitude,
+                                        title: mycontent.title,
                                       )));
                         },
                         child: Icon(
@@ -153,11 +153,11 @@ class _DetailScreenState extends State<DetailScreen> {
                       SizedBox(width: 14),
 
                       // link
-                      content.link == null || content.link == " "
+                      mycontent.link == null || mycontent.link == " "
                           ? Text('')
                           : ElevatedButton(
                               onPressed: () {
-                                _launchURL(content.link);
+                                _launchURL(mycontent.link);
                               },
                               child: Icon(
                                 CupertinoIcons.play_fill,
@@ -192,7 +192,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               size: 20,
                             ),
                             SizedBox(width: 7),
-                            Text(content.favorite.toString()),
+                            Text(mycontent.favorite.toString()),
                           ],
                         ),
                       ),
@@ -206,7 +206,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               size: 18,
                             ),
                             SizedBox(width: 7),
-                            Text(content.save.toString()),
+                            Text(mycontent.save.toString()),
                           ],
                         ),
                       ),
@@ -220,7 +220,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               size: 18,
                             ),
                             SizedBox(width: 7),
-                            Text(content.share.toString()),
+                            Text(mycontent.share.toString()),
                           ],
                         ),
                       ),
@@ -234,7 +234,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               size: 18,
                             ),
                             SizedBox(width: 7),
-                            Text(content.counterread.toString()),
+                            Text(mycontent.read.toString()),
                           ],
                         ),
                       ),
@@ -254,7 +254,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       Container(
                         padding: EdgeInsets.only(top: 40, left: 21, bottom: 20),
                         child: Text(
-                          'Comments (' + content.comments.toString() + ')',
+                          'Comments (' + mycontent.comment.toString() + ')',
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w400,
@@ -262,7 +262,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ),
                       // comment
-                      CommentWidget(idcontent: content.idcontent),
+                      CommentWidget(idcontent: mycontent.idcontent),
                       SizedBox(height: 30),
                     ],
                   ),
@@ -276,7 +276,7 @@ class _DetailScreenState extends State<DetailScreen> {
   }
 
   // images
-  Widget showimages(ContentModel contents) {
+  Widget showimages(MyContentModel contents) {
     List images = [
       'http://35.213.159.134/uploadimages/${contents.images01}',
       'http://35.213.159.134/uploadimages/${contents.images02}',

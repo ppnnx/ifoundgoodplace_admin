@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ifgpadmin/models/user_model.dart';
+import 'package:ifgpadmin/models/all_user_model.dart';
 import 'package:ifgpadmin/service/user_api.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,7 +15,8 @@ class _UserNDWidgetState extends State<UserNDWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: APIUser.getUser(),
-        builder: (BuildContext context, AsyncSnapshot<List<User>> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<AllUsers>> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
                 shrinkWrap: true,
@@ -85,29 +86,29 @@ class _UserNDWidgetState extends State<UserNDWidget> {
                                     ),
                                   ),
                                   SizedBox(height: 10),
-                                  Text(
-                                    "Create : " + user.createdate,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13.5,
-                                    ),
-                                  ),
+                                  // Text(
+                                  //   "Create : " + user.createdate,
+                                  //   style: TextStyle(
+                                  //     color: Colors.black,
+                                  //     fontSize: 13.5,
+                                  //   ),
+                                  // ),
                                   SizedBox(height: 3),
-                                  Text(
-                                    "Follower : " + user.follower.toString(),
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13.5,
-                                    ),
-                                  ),
-                                  SizedBox(height: 3),
-                                  Text(
-                                    "Following : " + user.following.toString(),
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13.5,
-                                    ),
-                                  )
+                                  // Text(
+                                  //   "Follower : " + user.follower.toString(),
+                                  //   style: TextStyle(
+                                  //     color: Colors.black,
+                                  //     fontSize: 13.5,
+                                  //   ),
+                                  // ),
+                                  // SizedBox(height: 3),
+                                  // Text(
+                                  //   "Following : " + user.following.toString(),
+                                  //   style: TextStyle(
+                                  //     color: Colors.black,
+                                  //     fontSize: 13.5,
+                                  //   ),
+                                  // )
                                 ],
                               ),
                             ),
@@ -145,7 +146,7 @@ class _UserNDWidgetState extends State<UserNDWidget> {
         });
   }
 
-  openalertbox(User user) {
+  openalertbox(AllUsers user) {
     return showDialog(
         context: context,
         builder: (context) {

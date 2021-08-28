@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ifgpadmin/widgets/user/user_default_widget.dart';
 import 'package:ifgpadmin/widgets/user/user_nd_widget.dart';
 import 'package:ifgpadmin/widgets/user/user_top_widget.dart';
 
@@ -16,7 +17,8 @@ class UserScreen extends StatelessWidget {
           TopUserWidget(),
           // UserTestWidget(),
           // UserWidget(),
-          UserNDWidget(),
+          // UserNDWidget(),
+          UserDefaultWidget(),
         ],
       )),
     );

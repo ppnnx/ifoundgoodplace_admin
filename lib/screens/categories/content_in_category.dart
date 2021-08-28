@@ -162,19 +162,19 @@ class _ContentinCategoryState extends State<ContentinCategory> {
     if (content.statuscontent == 'posted') {
       return Icon(
         CupertinoIcons.capsule_fill,
-        color: Colors.green,
+        color: Color(0xFF5AA469),
         size: 20,
       );
     } else if (content.statuscontent == 'deleted') {
       return Icon(
         CupertinoIcons.capsule_fill,
-        color: Colors.red,
+        color: Color(0xFFC05555),
         size: 20,
       );
     } else if (content.statuscontent == 'hidden') {
       return Icon(
         CupertinoIcons.capsule_fill,
-        color: Colors.amberAccent,
+        color: Color(0xFF6B7AA1),
         size: 20,
       );
     }

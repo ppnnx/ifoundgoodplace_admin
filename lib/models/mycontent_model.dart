@@ -1,71 +1,79 @@
-class ContentModel {
+class MyContentModel {
   int iduser;
   String username;
+  String display;
+  String statuspost;
   String statuscontent;
+  String statusreport;
+  String statement;
   int idcontent;
-  String dateContent;
-  String timeContent;
+  String datecontent;
   String title;
   String category;
   String content;
   String link;
   double latitude;
   double longitude;
-  int counterread;
+  int read;
   String images01;
   String images02;
   String images03;
   String images04;
   int favorite;
+  int comment;
   int save;
-  int comments;
   int share;
 
-  ContentModel({
-    this.iduser,
-    this.username,
-    this.statuscontent,
-    this.idcontent,
-    this.dateContent,
-    this.timeContent,
-    this.title,
-    this.category,
-    this.content,
-    this.link,
-    this.latitude,
-    this.longitude,
-    this.counterread,
-    this.images01,
-    this.images02,
-    this.images03,
-    this.images04,
-    this.favorite,
-    this.save,
-    this.comments,
-    this.share,
-  });
+  MyContentModel(
+      {this.iduser,
+      this.username,
+      this.display,
+      this.statuspost,
+      this.statuscontent,
+      this.statusreport,
+      this.statement,
+      this.idcontent,
+      this.datecontent,
+      this.title,
+      this.category,
+      this.content,
+      this.link,
+      this.latitude,
+      this.longitude,
+      this.read,
+      this.images01,
+      this.images02,
+      this.images03,
+      this.images04,
+      this.favorite,
+      this.comment,
+      this.save,
+      this.share});
 
-  ContentModel.fromJson(Map<String, dynamic> json) {
+  MyContentModel.fromJson(Map<String, dynamic> json) {
     iduser = json['ID_User'];
     username = json['Username'];
+    display = json['Image'];
+    statuspost = json['Status_Post'];
     statuscontent = json['Status_Content'];
+    statusreport = json['Status_Report'];
+    statement = json['Statement'];
     idcontent = json['ID_Content'];
-    dateContent = json['Date_Content'];
-    timeContent = json['Time_Content'];
+    datecontent = json['Date_Content'];
     title = json['Title'];
     category = json['Category'];
     content = json['Content'];
     link = json['Link_VDO'];
     latitude = json['Latitude'];
     longitude = json['Longitude'];
-    counterread = json['Counter_Read'];
+    read = json['Counter_Read'];
     images01 = json['Images01'];
     images02 = json['Images02'];
     images03 = json['Images03'];
     images04 = json['Images04'];
     favorite = json['Total_Fav'];
+    comment = json['Total_Com'];
     save = json['Total_Save'];
-    comments = json['Total_Com'];
     share = json['Total_Share'];
   }
 
@@ -73,24 +81,27 @@ class ContentModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['ID_User'] = this.iduser;
     data['Username'] = this.username;
+    data['Image'] = this.display;
+    data['Status_Post'] = this.statuspost;
     data['Status_Content'] = this.statuscontent;
+    data['Status_Report'] = this.statusreport;
+    data['Statement'] = this.statement;
     data['ID_Content'] = this.idcontent;
-    data['Date_Content'] = this.dateContent;
-    data['Time_Content'] = this.timeContent;
+    data['Date_Content'] = this.datecontent;
     data['Title'] = this.title;
     data['Category'] = this.category;
     data['Content'] = this.content;
     data['Link_VDO'] = this.link;
     data['Latitude'] = this.latitude;
     data['Longitude'] = this.longitude;
-    data['Counter_Read'] = this.counterread;
+    data['Counter_Read'] = this.read;
     data['Images01'] = this.images01;
     data['Images02'] = this.images02;
     data['Images03'] = this.images03;
     data['Images04'] = this.images04;
     data['Total_Fav'] = this.favorite;
+    data['Total_Com'] = this.comment;
     data['Total_Save'] = this.save;
-    data['Total_Com'] = this.comments;
     data['Total_Share'] = this.share;
     return data;
   }

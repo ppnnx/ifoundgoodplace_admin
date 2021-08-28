@@ -34,7 +34,7 @@ class ReportWidget extends StatelessWidget {
                             EdgeInsets.symmetric(horizontal: 14, vertical: 5),
                         padding: EdgeInsets.only(
                             left: 22, right: 16, top: 14, bottom: 14),
-                        height: 180,
+                        // height: 180,
                         width: 375,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -47,38 +47,52 @@ class ReportWidget extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text(
-                                  report.title,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                  maxLines: 2,
+                                Expanded(
+                                  child: Text(
+                                    report.title,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                    maxLines: 2,
+                                  ),
                                 ),
                               ],
                             ),
                             SizedBox(height: 5),
                             report.statusReport == 'reported'
-                                ? Container(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          CupertinoIcons.bolt_circle_fill,
-                                          color: Colors.amber,
-                                          size: 18,
+                                ? Row(
+                                    children: [
+                                      Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Icon(
+                                              CupertinoIcons.bolt_circle_fill,
+                                              color: Colors.amber,
+                                              size: 18,
+                                            ),
+                                            SizedBox(width: 5),
+                                            Text(
+                                              'Waiting for review',
+                                              style: TextStyle(
+                                                color: Colors.amber,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          'Waiting for review',
-                                          style: TextStyle(
-                                            color: Colors.amber,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      SizedBox(width: 16),
+                                      Icon(
+                                        CupertinoIcons.capsule_fill,
+                                        color: report.statusContent == "posted"
+                                            ? Colors.green.shade600
+                                            : Colors.red.shade800,
+                                        size: 19,
+                                      ),
+                                    ],
                                   )
                                 : Container(
                                     child: Row(
@@ -122,7 +136,7 @@ class ReportWidget extends StatelessWidget {
                                                 size: 19,
                                               ),
                                               SizedBox(width: 5),
-                                              //  
+                                              //
                                             ],
                                           ),
                                         ),
@@ -151,9 +165,9 @@ class ReportWidget extends StatelessWidget {
                                 Text(
                                   report.statement.toUpperCase(),
                                   style: TextStyle(
-                                      color: Color(0xFF161616),
-                                      fontWeight: FontWeight.w500,
-                                      fontStyle: FontStyle.italic),
+                                    color: Color(0xFF161616),
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 )
                               ],
                             ),

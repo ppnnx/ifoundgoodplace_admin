@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ifgpadmin/models/all_content_rank_model.dart';
+import 'package:ifgpadmin/models/content_model.dart';
+import 'package:ifgpadmin/screens/detail/detail_screen.dart';
 import 'package:ifgpadmin/service/all_content_rank_api.dart';
 
 class AllContentScreen extends StatelessWidget {
@@ -33,16 +35,26 @@ class AllContentScreen extends StatelessWidget {
           FutureBuilder(
               future: TrendingAPI.getTrendingContent(),
               builder: (BuildContext context,
-                  AsyncSnapshot<List<TrendingModel>> snapshot) {
+                  AsyncSnapshot<List<ContentModel>> snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
                       shrinkWrap: true,
                       physics: BouncingScrollPhysics(),
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext _, int index) {
-                        return FullChartWidget(
-                          rank: index + 1,
-                          data: snapshot.data[index],
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailScreen(
+                                          contentModel: snapshot.data[index],
+                                        )));
+                          },
+                          child: FullChartWidget(
+                            rank: index + 1,
+                            data: snapshot.data[index],
+                          ),
                         );
                       });
                 }
@@ -62,7 +74,7 @@ class AllContentScreen extends StatelessWidget {
 
 class FullChartWidget extends StatelessWidget {
   final int rank;
-  final TrendingModel data;
+  final ContentModel data;
 
   const FullChartWidget({Key key, this.rank, this.data}) : super(key: key);
 
@@ -132,7 +144,7 @@ class FullChartWidget extends StatelessWidget {
                       ),
                       SizedBox(width: 8),
                       Text(
-                        data.counterRead.toString(),
+                        data.counterread.toString(),
                         style: TextStyle(color: Colors.black, fontSize: 12),
                       ),
                     ],

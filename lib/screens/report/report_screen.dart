@@ -34,9 +34,10 @@ class _ReportScreenState extends State<ReportScreen> {
   // api unpublished content
   unpublishcontent() async {
     try {
-      final url = Uri.parse('http://35.213.159.134/statusct.php');
+      final url = Uri.parse('http://35.213.159.134/unpublish.php');
       final response = await http.post(url, body: {
         "ID_Content": widget.reportModel.idcontent.toString(),
+        "Cause": widget.reportModel.statement,
         "Status_Content": 'hidden',
       });
 
@@ -112,7 +113,7 @@ class _ReportScreenState extends State<ReportScreen> {
             // bill part
             widget.reportModel.statusReport == 'reported'
                 ? Container(
-                    height: 200,
+                    // height: 200,
                     padding: EdgeInsets.only(
                       top: 10,
                       left: 8,
@@ -130,22 +131,35 @@ class _ReportScreenState extends State<ReportScreen> {
                             children: [
                               // title
                               Row(
-                                children: [
-                                  Text(
-                                    'Title : ',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15),
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 3),
+                                      child: Text(
+                                        'Title : ',
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15),
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(width: 2),
-                                  Text(
-                                    widget.namecontent,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15),
+                                  Expanded(
+                                    flex: 7,
+                                    child: Container(
+                                      child: Text(
+                                        widget.namecontent,
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 15),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                               SizedBox(height: 7),
+
                               // author
                               Row(
                                 children: [
@@ -185,7 +199,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                       color: Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.italic,
+                                      // fontStyle: FontStyle.italic,
                                     ),
                                   ),
                                 ],
@@ -299,28 +313,40 @@ class _ReportScreenState extends State<ReportScreen> {
                               SizedBox(height: 10),
                               // title
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Title : ',
-                                    style: TextStyle(
-                                        color:
-                                            widget.reportModel.statusContent ==
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 3),
+                                      child: Text(
+                                        'Title : ',
+                                        style: TextStyle(
+                                            color: widget.reportModel
+                                                        .statusContent ==
                                                     "hidden"
                                                 ? Colors.white
                                                 : Colors.black,
-                                        fontSize: 15),
+                                            fontSize: 15),
+                                      ),
+                                    ),
                                   ),
                                   SizedBox(width: 2),
-                                  Text(
-                                    widget.namecontent,
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                        color:
-                                            widget.reportModel.statusContent ==
+                                  Expanded(
+                                    flex: 7,
+                                    child: Container(
+                                      child: Text(
+                                        widget.namecontent,
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                            color: widget.reportModel
+                                                        .statusContent ==
                                                     "hidden"
                                                 ? Colors.white
                                                 : Colors.black,
-                                        fontSize: 15),
+                                            fontSize: 15),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -376,7 +402,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                           : Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.italic,
+                                      // fontStyle: FontStyle.italic,
                                     ),
                                   ),
                                 ],

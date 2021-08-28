@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ifgpadmin/models/user_model.dart';
+import 'package:ifgpadmin/models/all_user_model.dart';
 import 'package:ifgpadmin/service/user_api.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,7 +11,7 @@ class UserWidget extends StatefulWidget {
 }
 
 class _UserWidgetState extends State<UserWidget> {
-  List<User> users = [];
+  List<AllUsers> users = [];
   String selected;
   bool state;
 
@@ -19,14 +19,14 @@ class _UserWidgetState extends State<UserWidget> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: APIUser.getUser(),
-        builder: (context, AsyncSnapshot<List<User>> snapshot) {
+        builder: (context, AsyncSnapshot<List<AllUsers>> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
                 itemCount: snapshot.data.length,
                 itemBuilder: (context, index) {
-                  User user = snapshot.data[index];
+                  AllUsers user = snapshot.data[index];
 
                   return ExpansionPanelList(
                     elevation: 1,
@@ -143,13 +143,13 @@ class _UserWidgetState extends State<UserWidget> {
                                       user.email,
                                     ),
                                     SizedBox(height: 5),
-                                    Text('Created : ' + user.createdate),
+                                    // Text('Created : ' + user.createdate),
                                     SizedBox(height: 5),
-                                    Text('Followers : ' +
-                                        user.follower.toString()),
-                                    SizedBox(height: 5),
-                                    Text('Following : ' +
-                                        user.following.toString())
+                                    // Text('Followers : ' +
+                                    //     user.follower.toString()),
+                                    // SizedBox(height: 5),
+                                    // Text('Following : ' +
+                                    //     user.following.toString())
                                   ],
                                 ),
                               ),
