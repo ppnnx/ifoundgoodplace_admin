@@ -9,9 +9,9 @@ import 'package:ifgpadmin/widgets/comment/comment_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailScreen extends StatefulWidget {
-  final ContentModel contentModel;
+  final ContentModel? contentModel;
 
-  const DetailScreen({Key key, this.contentModel}) : super(key: key);
+  const DetailScreen({Key? key, this.contentModel}) : super(key: key);
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
@@ -33,7 +33,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final content = widget.contentModel;
+    final content = widget.contentModel!;
 
     return Scaffold(
       appBar: AppBar(
@@ -61,14 +61,14 @@ class _DetailScreenState extends State<DetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        content.dateContent,
+                        content.dateContent!,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       Text(
-                        content.username,
+                        content.username!,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
@@ -86,7 +86,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                         ),
                         child: Text(
-                          content.category.toLowerCase(),
+                          content.category!.toLowerCase(),
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 13,
@@ -102,7 +102,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Container(
                   padding: EdgeInsets.all(21.0),
                   child: Text(
-                    content.title,
+                    content.title!,
                     style: TextStyle(fontFamily: 'Kanit', fontSize: 24),
                   ),
                 ),
@@ -115,7 +115,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Container(
                   padding: EdgeInsets.all(21.0),
                   child: Text(
-                    content.content,
+                    content.content!,
                     style: TextStyle(color: Colors.black, fontSize: 16),
                   ),
                 ),
@@ -130,13 +130,15 @@ class _DetailScreenState extends State<DetailScreen> {
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MapScreen(
-                                        lat: content.latitude,
-                                        lng: content.longitude,
-                                        title: content.title,
-                                      )));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MapScreen(
+                                lat: content.latitude,
+                                lng: content.longitude,
+                                title: content.title,
+                              ),
+                            ),
+                          );
                         },
                         child: Icon(
                           CupertinoIcons.placemark,
@@ -153,11 +155,10 @@ class _DetailScreenState extends State<DetailScreen> {
                       SizedBox(width: 14),
 
                       // link
-                      content.link == null || content.link == " "
-                          ? Text('')
-                          : ElevatedButton(
+                      widget.contentModel!.link != "link"
+                          ? ElevatedButton(
                               onPressed: () {
-                                _launchURL(content.link);
+                                _launchURL(widget.contentModel!.link!);
                               },
                               child: Icon(
                                 CupertinoIcons.play_fill,
@@ -170,6 +171,10 @@ class _DetailScreenState extends State<DetailScreen> {
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   elevation: 0.0),
+                            )
+                          : Container(
+                              height: 0.0,
+                              width: 0.0,
                             ),
                     ],
                   ),
@@ -329,20 +334,22 @@ class _DetailScreenState extends State<DetailScreen> {
           // dot (indicatior)
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: images.map((url) {
-              int index = images.indexOf(url);
+            children: images.map(
+              (url) {
+                int index = images.indexOf(url);
 
-              return Container(
-                width: 8.0,
-                height: 8.0,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 3.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black),
-                  color: _current == index ? Colors.black : Colors.white,
-                ),
-              );
-            }).toList(),
+                return Container(
+                  width: 8.0,
+                  height: 8.0,
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 3.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.black),
+                    color: _current == index ? Colors.black : Colors.white,
+                  ),
+                );
+              },
+            ).toList(),
           )
         ],
       ),

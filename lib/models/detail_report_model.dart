@@ -1,10 +1,10 @@
 class DetailReportModel {
-  int iduser;
-  String username;
-  int idcontent;
-  String title;
-  String statuscontent;
-  String cause;
+  int? iduser;
+  String? username;
+  int? idcontent;
+  String? title;
+  String? statuscontent;
+  String? cause;
 
   DetailReportModel(
       {this.iduser,

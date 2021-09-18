@@ -11,7 +11,7 @@ import 'package:ifgpadmin/screens/detail/article_screen.dart';
 class ProfileContentWidget extends StatefulWidget {
   final id;
 
-  const ProfileContentWidget({Key key, this.id}) : super(key: key);
+  const ProfileContentWidget({Key? key, this.id}) : super(key: key);
 
   @override
   _ProfileContentWidgetState createState() => _ProfileContentWidgetState();
@@ -85,9 +85,9 @@ class _ProfileContentWidgetState extends State<ProfileContentWidget> {
                 return ListView.builder(
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
-                    itemCount: snapshot.data.length,
+                    itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
-                      final total = snapshot.data[index];
+                      final total = snapshot.data![index];
 
                       return ExpansionTile(
                         title: Text(
@@ -113,10 +113,10 @@ class _ProfileContentWidgetState extends State<ProfileContentWidget> {
                                       return ListView.builder(
                                           shrinkWrap: true,
                                           physics: BouncingScrollPhysics(),
-                                          itemCount: snapshot.data.length,
+                                          itemCount: snapshot.data!.length,
                                           itemBuilder: (context, index) {
                                             final mycontent =
-                                                snapshot.data[index];
+                                                snapshot.data![index];
 
                                             return ListTile(
                                               onTap: () {
@@ -126,7 +126,7 @@ class _ProfileContentWidgetState extends State<ProfileContentWidget> {
                                                         builder: (context) =>
                                                             ArticleScreen(
                                                               myContentModel:
-                                                                  snapshot.data[
+                                                                  snapshot.data![
                                                                       index],
                                                             )));
                                               },
@@ -150,7 +150,7 @@ class _ProfileContentWidgetState extends State<ProfileContentWidget> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      mycontent.title,
+                                                      mycontent.title!,
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16,
@@ -161,7 +161,8 @@ class _ProfileContentWidgetState extends State<ProfileContentWidget> {
                                                     SizedBox(height: 12),
                                                     Text(
                                                       "created : " +
-                                                          mycontent.datecontent,
+                                                          mycontent
+                                                              .datecontent!,
                                                       style: TextStyle(
                                                         color: Colors.black54,
                                                         fontSize: 13,
@@ -309,9 +310,9 @@ class _ProfileContentWidgetState extends State<ProfileContentWidget> {
                   return ListView.builder(
                       shrinkWrap: true,
                       physics: BouncingScrollPhysics(),
-                      itemCount: snapshot.data.length,
+                      itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        final total = snapshot.data[index];
+                        final total = snapshot.data![index];
 
                         return ExpansionTile(
                           // leading: total.report == 3
@@ -338,7 +339,7 @@ class _ProfileContentWidgetState extends State<ProfileContentWidget> {
                                         color: Color(0xFFF6D167),
                                         size: 24,
                                       )
-                                    : null,
+                                    : Text(''),
                               ],
                             ),
                           ),
@@ -357,10 +358,10 @@ class _ProfileContentWidgetState extends State<ProfileContentWidget> {
                                         return ListView.builder(
                                             shrinkWrap: true,
                                             physics: BouncingScrollPhysics(),
-                                            itemCount: snapshot.data.length,
+                                            itemCount: snapshot.data!.length,
                                             itemBuilder: (context, int index) {
                                               final report =
-                                                  snapshot.data[index];
+                                                  snapshot.data![index];
                                               int number = index + 1;
                                               return ListTile(
                                                   leading: Text(
@@ -378,7 +379,7 @@ class _ProfileContentWidgetState extends State<ProfileContentWidget> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          report.title,
+                                                          report.title!,
                                                           style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 15.7,

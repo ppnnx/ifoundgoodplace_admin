@@ -1,13 +1,13 @@
 class AllUsers {
-  int iduser;
-  String username;
-  String image;
-  String email;
-  String status;
-  int content;
-  int post;
-  int delete;
-  int report;
+  int? iduser;
+  String? username;
+  String? image;
+  String? email;
+  String? status;
+  int? content;
+  int? post;
+  int? delete;
+  int? report;
 
   AllUsers(
       {this.iduser,

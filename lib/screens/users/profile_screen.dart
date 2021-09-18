@@ -9,7 +9,7 @@ import 'package:ifgpadmin/screens/users/widget/profile_content_widget.dart';
 class ProfileScreen extends StatefulWidget {
   final id;
 
-  const ProfileScreen({Key key, this.id}) : super(key: key);
+  const ProfileScreen({Key? key, this.id}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -60,9 +60,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: snapshot.data.length,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          User profile = snapshot.data[index];
+                          User profile = snapshot.data![index];
 
                           return Container(
                             padding: EdgeInsets.only(
@@ -114,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        profile.username,
+                                        profile.username!,
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 15.7,
@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                       SizedBox(height: 8),
                                       Text(
-                                        profile.email,
+                                        profile.email!,
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 13,
@@ -130,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                       SizedBox(height: 1.0),
                                       Text(
-                                        "created : " + profile.createdate,
+                                        "created : " + profile.createdate!,
                                         style: TextStyle(
                                           color: Colors.black54,
                                           fontSize: 13,

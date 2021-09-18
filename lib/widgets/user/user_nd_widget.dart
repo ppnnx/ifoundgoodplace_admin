@@ -21,9 +21,9 @@ class _UserNDWidgetState extends State<UserNDWidget> {
             return ListView.builder(
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  final user = snapshot.data[index];
+                  final user = snapshot.data![index];
 
                   return ExpansionTile(
                     leading: Icon(
@@ -34,7 +34,7 @@ class _UserNDWidgetState extends State<UserNDWidget> {
                       size: 24,
                     ),
                     title: Text(
-                      user.username,
+                      user.username!,
                     ),
                     children: <Widget>[
                       Container(
@@ -79,7 +79,7 @@ class _UserNDWidgetState extends State<UserNDWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    user.email,
+                                    user.email!,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,

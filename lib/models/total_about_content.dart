@@ -1,10 +1,10 @@
 class TotalAboutContent {
-  int iduser;
-  String username;
-  int content;
-  int post;
-  int delete;
-  int report;
+  int? iduser;
+  String? username;
+  int? content;
+  int? post;
+  int? delete;
+  int? report;
 
   TotalAboutContent(
       {this.iduser,

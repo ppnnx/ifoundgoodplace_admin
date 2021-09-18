@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:ifgpadmin/screens/contents/contents_screen.dart';
-import 'package:ifgpadmin/screens/dashboard/dashboard_screen.dart';
 import 'package:ifgpadmin/screens/login/login_screen.dart';
-import 'package:ifgpadmin/screens/users/users_screen.dart';
 
 void main() {
   runApp(MyApp());

@@ -18,14 +18,14 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.3
 
   # google font 
   google_fonts: ^2.1.0
@@ -37,16 +37,13 @@ dependencies:
   cached_network_image: ^3.1.0
 
   # carousel slider
-  carousel_slider: ^3.0.0
-
-  # rolling switch 
-  lite_rolling_switch: ^0.1.1
+  carousel_slider: ^4.0.0
 
   # progress hud
   bmprogresshud: ^1.0.0
 
   # loading
-  flutter_easyloading: ^3.0.0
+  flutter_easyloading: ^3.0.3
 
   # map
   google_maps_flutter: ^2.0.6
@@ -54,6 +51,8 @@ dependencies:
   # url
   url_launcher: ^6.0.9
 
+  # geolocator
+  geolocator: ^7.6.0
 
 
 dev_dependencies:

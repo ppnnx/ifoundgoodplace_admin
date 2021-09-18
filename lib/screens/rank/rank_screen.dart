@@ -118,9 +118,9 @@ class _RankScreenState extends State<RankScreen> {
                             return ListView.builder(
                                 shrinkWrap: true,
                                 physics: BouncingScrollPhysics(),
-                                itemCount: snapshot.data.length,
+                                itemCount: snapshot.data!.length,
                                 itemBuilder: (context, index) {
-                                  final category = snapshot.data[index];
+                                  final category = snapshot.data![index];
 
                                   return ListTile(
                                     onTap: () {
@@ -134,7 +134,7 @@ class _RankScreenState extends State<RankScreen> {
                                                   )));
                                     },
                                     title: Text(
-                                      category.name,
+                                      category.name!,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 15,

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:ifgpadmin/models/author_rank_model.dart';
 
 class AuthorTrendingAPI {
-  static Future<List<AuthorTrendingModel>> getTrendingAuthor() async {
+  static Future<List<AuthorTrendingModel>?> getTrendingAuthor() async {
     try {
       var url = Uri.parse('http://35.213.159.134/rankingbyuser.php?rankbyuser');
       var response = await http.get(url);

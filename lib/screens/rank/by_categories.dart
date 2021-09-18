@@ -11,7 +11,7 @@ class ByCategoryScreen extends StatefulWidget {
   final idcategory;
   final namecategory;
 
-  const ByCategoryScreen({Key key, this.idcategory, this.namecategory})
+  const ByCategoryScreen({Key? key, this.idcategory, this.namecategory})
       : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class ByCategoryScreen extends StatefulWidget {
 
 class _ByCategoryScreenState extends State<ByCategoryScreen> {
   // fetch data from api
-  Future<List<ContentModel>> getContents() async {
+  Future<List<ContentModel>?> getContents() async {
     try {
       final url = Uri.parse(
           'http://35.213.159.134/rankingbycategory.php?rankbycategory=${widget.idcategory}');
@@ -65,11 +65,11 @@ class _ByCategoryScreenState extends State<ByCategoryScreen> {
             FutureBuilder(
                 future: getContents(),
                 builder: (BuildContext context,
-                    AsyncSnapshot<List<ContentModel>> snapshot) {
+                    AsyncSnapshot<List<ContentModel>?> snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
                         shrinkWrap: true,
-                        itemCount: snapshot.data.length,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: (BuildContext _, int index) {
                           return GestureDetector(
                             onTap: () {
@@ -77,12 +77,12 @@ class _ByCategoryScreenState extends State<ByCategoryScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => DetailScreen(
-                                            contentModel: snapshot.data[index],
+                                            contentModel: snapshot.data![index],
                                           )));
                             },
                             child: ChartWidget(
                               rank: index + 1,
-                              data: snapshot.data[index],
+                              data: snapshot.data![index],
                             ),
                           );
                         });
@@ -102,10 +102,10 @@ class _ByCategoryScreenState extends State<ByCategoryScreen> {
 }
 
 class ChartWidget extends StatelessWidget {
-  final int rank;
-  final ContentModel data;
+  final int? rank;
+  final ContentModel? data;
 
-  const ChartWidget({Key key, this.rank, this.data}) : super(key: key);
+  const ChartWidget({Key? key, this.rank, this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -151,12 +151,12 @@ class ChartWidget extends StatelessWidget {
                   // ),
                   // SizedBox(height: 7),
                   Text(
-                    data.title,
+                    data!.title!,
                     style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
                   SizedBox(height: 7),
                   Text(
-                    data.username,
+                    data!.username!,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 12,
@@ -173,7 +173,7 @@ class ChartWidget extends StatelessWidget {
                       ),
                       SizedBox(width: 8),
                       Text(
-                        data.counterread.toString(),
+                        data!.counterread.toString(),
                         style: TextStyle(color: Colors.black, fontSize: 12),
                       ),
                     ],
@@ -190,7 +190,7 @@ class ChartWidget extends StatelessWidget {
                   ClipRRect(
                     child: CachedNetworkImage(
                       imageUrl:
-                          'http://35.213.159.134/uploadimages/${data.images01}',
+                          'http://35.213.159.134/uploadimages/${data!.images01}',
                       height: 80,
                       width: 80,
                       fit: BoxFit.cover,

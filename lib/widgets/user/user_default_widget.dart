@@ -20,9 +20,9 @@ class _UserDefaultWidgetState extends State<UserDefaultWidget> {
             return ListView.builder(
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  AllUsers user = snapshot.data[index];
+                  AllUsers user = snapshot.data![index];
 
                   return Container(
                     padding: EdgeInsets.only(left: 16.0, right: 16.0),
@@ -45,7 +45,7 @@ class _UserDefaultWidgetState extends State<UserDefaultWidget> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    user.username,
+                                    user.username!,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
@@ -56,7 +56,7 @@ class _UserDefaultWidgetState extends State<UserDefaultWidget> {
                               ),
                             ),
                             subtitle: Text(
-                              user.image.toString(),
+                              user.email!,
                               style: TextStyle(
                                 fontSize: 13,
                               ),

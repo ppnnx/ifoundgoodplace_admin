@@ -9,15 +9,15 @@ class ContentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: APIContent.getContent(),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot<List<ContentModel>> snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               physics: BouncingScrollPhysics(),
-              itemCount: snapshot.data.length,
+              itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                ContentModel content = snapshot.data[index];
+                ContentModel content = snapshot.data![index];
 
                 return GestureDetector(
                   onTap: () {
@@ -25,7 +25,7 @@ class ContentWidget extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => DetailScreen(
-                                  contentModel: snapshot.data[index],
+                                  contentModel: snapshot.data![index],
                                 )));
                   },
                   child: Container(
@@ -51,7 +51,7 @@ class ContentWidget extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(14.0),
                                     ),
                                     child: Text(
-                                      content.category,
+                                      content.category!,
                                       style: TextStyle(color: Colors.white),
                                     ),
                                   ),
@@ -62,7 +62,7 @@ class ContentWidget extends StatelessWidget {
 
                               SizedBox(height: 10),
                               Text(
-                                content.title,
+                                content.title!,
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 18),
                               ),
@@ -70,7 +70,7 @@ class ContentWidget extends StatelessWidget {
 
                               // date
                               Text(
-                                'created : ' + content.dateContent,
+                                'created : ' + content.dateContent!,
                                 style: TextStyle(
                                     color: Colors.black.withOpacity(0.7)),
                               ),
@@ -83,7 +83,7 @@ class ContentWidget extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    content.username,
+                                    content.username!,
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 15),
                                   ),
@@ -135,7 +135,7 @@ class ContentWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(14.0),
         ),
         child: Text(
-          contentModel.statuscontent,
+          contentModel.statuscontent!,
           style: TextStyle(color: Colors.white),
         ),
       );
@@ -147,7 +147,7 @@ class ContentWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(14.0),
         ),
         child: Text(
-          contentModel.statuscontent,
+          contentModel.statuscontent!,
           style: TextStyle(color: Colors.white),
         ),
       );
@@ -159,7 +159,7 @@ class ContentWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(14.0),
         ),
         child: Text(
-          contentModel.statuscontent,
+          contentModel.statuscontent!,
           style: TextStyle(color: Colors.black),
         ),
       );

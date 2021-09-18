@@ -8,13 +8,13 @@ import 'package:ifgpadmin/models/report_model.dart';
 import 'package:http/http.dart' as http;
 
 class ReportScreen extends StatefulWidget {
-  final int idcontent;
-  final String namecontent;
-  final String statement;
-  final ReportModel reportModel;
+  final int? idcontent;
+  final String? namecontent;
+  final String? statement;
+  final ReportModel? reportModel;
 
   const ReportScreen(
-      {Key key,
+      {Key? key,
       this.idcontent,
       this.namecontent,
       this.statement,
@@ -26,8 +26,8 @@ class ReportScreen extends StatefulWidget {
 }
 
 class _ReportScreenState extends State<ReportScreen> {
-  Timer _timer;
-  double _progress;
+  Timer? _timer;
+  late double _progress;
 
   int _current = 0; // for dot (image slide)
 
@@ -36,8 +36,8 @@ class _ReportScreenState extends State<ReportScreen> {
     try {
       final url = Uri.parse('http://35.213.159.134/unpublish.php');
       final response = await http.post(url, body: {
-        "ID_Content": widget.reportModel.idcontent.toString(),
-        "Cause": widget.reportModel.statement,
+        "ID_Content": widget.reportModel!.idcontent.toString(),
+        "Cause": widget.reportModel!.statement,
         "Status_Content": 'hidden',
       });
 
@@ -56,7 +56,7 @@ class _ReportScreenState extends State<ReportScreen> {
             _timer?.cancel();
             EasyLoading.dismiss();
             await delayprogress(2000);
-            Navigator.of(context).pop(true);
+            Navigator.pop(context);
           }
         });
       } else {}
@@ -68,12 +68,12 @@ class _ReportScreenState extends State<ReportScreen> {
     try {
       final url = Uri.parse('http://35.213.159.134/statusreport.php');
       final response = await http.post(url, body: {
-        "ID_Report": widget.reportModel.idreport.toString(),
+        "ID_Report": widget.reportModel!.idreport.toString(),
         "Status_Report": 'checked',
       });
 
       if (response.statusCode == 200) {
-        print('already change status ${widget.reportModel.title}!');
+        print('already change status ${widget.reportModel!.title}!');
       } else {
         print('failed!');
       }
@@ -111,7 +111,7 @@ class _ReportScreenState extends State<ReportScreen> {
         child: ListView(
           children: [
             // bill part
-            widget.reportModel.statusReport == 'reported'
+            widget.reportModel!.statusReport == 'reported'
                 ? Container(
                     // height: 200,
                     padding: EdgeInsets.only(
@@ -149,7 +149,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                     flex: 7,
                                     child: Container(
                                       child: Text(
-                                        widget.namecontent,
+                                        widget.namecontent!,
                                         style: TextStyle(
                                             color: Colors.black, fontSize: 15),
                                         textAlign: TextAlign.left,
@@ -172,7 +172,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                   ),
                                   SizedBox(width: 2),
                                   Text(
-                                    widget.reportModel.author,
+                                    widget.reportModel!.author!,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
@@ -194,7 +194,8 @@ class _ReportScreenState extends State<ReportScreen> {
                                   ),
                                   SizedBox(width: 2),
                                   Text(
-                                    widget.reportModel.statement.toUpperCase(),
+                                    widget.reportModel!.statement!
+                                        .toUpperCase(),
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
@@ -217,7 +218,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                   ),
                                   SizedBox(width: 2),
                                   Text(
-                                    widget.reportModel.dateReport,
+                                    widget.reportModel!.dateReport!,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,
@@ -241,7 +242,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                   await delayprogress(2000);
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('No wrong'),
+                                child: Text('Approve'),
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.black,
                                     elevation: 0.0,
@@ -274,7 +275,7 @@ class _ReportScreenState extends State<ReportScreen> {
                       left: 8,
                       bottom: 8,
                     ),
-                    color: widget.reportModel.statusContent == "hidden"
+                    color: widget.reportModel!.statusContent == "hidden"
                         ? Colors.red.shade700
                         : Colors.green.shade200,
                     child: Column(
@@ -290,7 +291,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                 children: [
                                   Icon(
                                     CupertinoIcons.checkmark_alt_circle_fill,
-                                    color: widget.reportModel.statusContent ==
+                                    color: widget.reportModel!.statusContent ==
                                             "hidden"
                                         ? Colors.white
                                         : Colors.black,
@@ -301,7 +302,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                     'Already checked',
                                     style: TextStyle(
                                         color:
-                                            widget.reportModel.statusContent ==
+                                            widget.reportModel!.statusContent ==
                                                     "hidden"
                                                 ? Colors.white
                                                 : Colors.black,
@@ -322,7 +323,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                       child: Text(
                                         'Title : ',
                                         style: TextStyle(
-                                            color: widget.reportModel
+                                            color: widget.reportModel!
                                                         .statusContent ==
                                                     "hidden"
                                                 ? Colors.white
@@ -336,10 +337,10 @@ class _ReportScreenState extends State<ReportScreen> {
                                     flex: 7,
                                     child: Container(
                                       child: Text(
-                                        widget.namecontent,
+                                        widget.namecontent!,
                                         maxLines: 2,
                                         style: TextStyle(
-                                            color: widget.reportModel
+                                            color: widget.reportModel!
                                                         .statusContent ==
                                                     "hidden"
                                                 ? Colors.white
@@ -357,21 +358,23 @@ class _ReportScreenState extends State<ReportScreen> {
                                   Text(
                                     'author : ',
                                     style: TextStyle(
-                                      color: widget.reportModel.statusContent ==
-                                              "hidden"
-                                          ? Colors.white
-                                          : Colors.black,
+                                      color:
+                                          widget.reportModel!.statusContent ==
+                                                  "hidden"
+                                              ? Colors.white
+                                              : Colors.black,
                                       fontSize: 15,
                                     ),
                                   ),
                                   SizedBox(width: 2),
                                   Text(
-                                    widget.reportModel.author,
+                                    widget.reportModel!.author!,
                                     style: TextStyle(
-                                      color: widget.reportModel.statusContent ==
-                                              "hidden"
-                                          ? Colors.white
-                                          : Colors.black,
+                                      color:
+                                          widget.reportModel!.statusContent ==
+                                                  "hidden"
+                                              ? Colors.white
+                                              : Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -385,21 +388,24 @@ class _ReportScreenState extends State<ReportScreen> {
                                   Text(
                                     'statement : ',
                                     style: TextStyle(
-                                      color: widget.reportModel.statusContent ==
-                                              "hidden"
-                                          ? Colors.white
-                                          : Colors.black,
+                                      color:
+                                          widget.reportModel!.statusContent ==
+                                                  "hidden"
+                                              ? Colors.white
+                                              : Colors.black,
                                       fontSize: 15,
                                     ),
                                   ),
                                   SizedBox(width: 2),
                                   Text(
-                                    widget.reportModel.statement.toUpperCase(),
+                                    widget.reportModel!.statement!
+                                        .toUpperCase(),
                                     style: TextStyle(
-                                      color: widget.reportModel.statusContent ==
-                                              "hidden"
-                                          ? Colors.white
-                                          : Colors.black,
+                                      color:
+                                          widget.reportModel!.statusContent ==
+                                                  "hidden"
+                                              ? Colors.white
+                                              : Colors.black,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
                                       // fontStyle: FontStyle.italic,
@@ -414,21 +420,23 @@ class _ReportScreenState extends State<ReportScreen> {
                                   Text(
                                     'date : ',
                                     style: TextStyle(
-                                      color: widget.reportModel.statusContent ==
-                                              "hidden"
-                                          ? Colors.white
-                                          : Colors.black,
+                                      color:
+                                          widget.reportModel!.statusContent ==
+                                                  "hidden"
+                                              ? Colors.white
+                                              : Colors.black,
                                       fontSize: 15,
                                     ),
                                   ),
                                   SizedBox(width: 2),
                                   Text(
-                                    widget.reportModel.dateReport,
+                                    widget.reportModel!.dateReport!,
                                     style: TextStyle(
-                                      color: widget.reportModel.statusContent ==
-                                              "hidden"
-                                          ? Colors.white
-                                          : Colors.black,
+                                      color:
+                                          widget.reportModel!.statusContent ==
+                                                  "hidden"
+                                              ? Colors.white
+                                              : Colors.black,
                                       fontSize: 15,
                                     ),
                                   ),
@@ -441,15 +449,16 @@ class _ReportScreenState extends State<ReportScreen> {
                                   Text(
                                     'status : ',
                                     style: TextStyle(
-                                      color: widget.reportModel.statusContent ==
-                                              "hidden"
-                                          ? Colors.white
-                                          : Colors.black,
+                                      color:
+                                          widget.reportModel!.statusContent ==
+                                                  "hidden"
+                                              ? Colors.white
+                                              : Colors.black,
                                       fontSize: 15,
                                     ),
                                   ),
                                   SizedBox(width: 2),
-                                  widget.reportModel.statusContent == 'hidden'
+                                  widget.reportModel!.statusContent == 'hidden'
                                       ? Text(
                                           'Unpublished',
                                           style: TextStyle(
@@ -481,18 +490,18 @@ class _ReportScreenState extends State<ReportScreen> {
             Container(
               padding: EdgeInsets.all(21.0),
               child: Text(
-                widget.reportModel.title,
+                widget.reportModel!.title!,
                 style: TextStyle(fontFamily: 'Kanit', fontSize: 24),
               ),
             ),
-            imageSlide(widget.reportModel),
+            imageSlide(widget.reportModel!),
             SizedBox(height: 30),
 
             // story
             Container(
               padding: EdgeInsets.all(21.0),
               child: Text(
-                widget.reportModel.content,
+                widget.reportModel!.content!,
                 style: TextStyle(color: Colors.black, fontSize: 16),
               ),
             ),

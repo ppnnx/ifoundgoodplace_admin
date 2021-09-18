@@ -11,7 +11,7 @@ class ContentinCategory extends StatefulWidget {
   final idcategory;
   final namecategory;
 
-  const ContentinCategory({Key key, this.idcategory, this.namecategory})
+  const ContentinCategory({Key? key, this.idcategory, this.namecategory})
       : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class ContentinCategory extends StatefulWidget {
 
 class _ContentinCategoryState extends State<ContentinCategory> {
   // fetch data from api
-  Future<List<ContentModel>> fetchContents() async {
+  Future<List<ContentModel>?> fetchContents() async {
     var url = Uri.parse(
         'http://35.213.159.134/searchbycatead.php?searchbycategory=${widget.idcategory}');
 
@@ -64,88 +64,89 @@ class _ContentinCategoryState extends State<ContentinCategory> {
           children: [
             FutureBuilder(
                 future: fetchContents(),
-                builder: (context, AsyncSnapshot<List<ContentModel>> snapshot) {
+                builder:
+                    (context, AsyncSnapshot<List<ContentModel>?> snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
-                        shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                          ContentModel contents = snapshot.data[index];
+                      shrinkWrap: true,
+                      physics: BouncingScrollPhysics(),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        ContentModel contents = snapshot.data![index];
 
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DetailScreen(
-                                            contentModel: snapshot.data[index],
-                                          )));
-                            },
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.only(
-                                        left: 18,
-                                        right: 18,
-                                        top: 10,
-                                        bottom: 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        // title
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            _showStatus(contents),
-                                            SizedBox(width: 10),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    contents.title,
-                                                    style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16),
-                                                  ),
-                                                  SizedBox(height: 7),
-                                                  // date
-                                                  Text(
-                                                    'created : ' +
-                                                        contents.dateContent,
-                                                    style: TextStyle(
-                                                        color: Colors.black
-                                                            .withOpacity(0.7)),
-                                                  ),
-                                                  SizedBox(height: 7),
-                                                  // author
-                                                  Text(
-                                                    contents.username,
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(),
-                                ],
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailScreen(
+                                  contentModel: snapshot.data![index],
+                                ),
                               ),
+                            );
+                          },
+                          child: Container(
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(
+                                      left: 18, right: 18, top: 10, bottom: 10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // title
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          _showStatus(contents),
+                                          SizedBox(width: 10),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  contents.title!,
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 16),
+                                                ),
+                                                SizedBox(height: 7),
+                                                // date
+                                                Text(
+                                                  'created : ' +
+                                                      contents.dateContent!,
+                                                  style: TextStyle(
+                                                      color: Colors.black
+                                                          .withOpacity(0.7)),
+                                                ),
+                                                SizedBox(height: 7),
+                                                // author
+                                                Text(
+                                                  contents.username!,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Divider(),
+                              ],
                             ),
-                          );
-                        });
+                          ),
+                        );
+                      },
+                    );
                   }
 
                   return Center(

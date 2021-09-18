@@ -5,7 +5,7 @@ class TopUserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 50, left: 16, right: 30, bottom: 50),
+      padding: const EdgeInsets.only(left: 16, right: 30, bottom: 50),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

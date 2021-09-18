@@ -1,25 +1,25 @@
 class ContentModel {
-  int iduser;
-  String username;
-  String statuscontent;
-  int idcontent;
-  String dateContent;
-  String timeContent;
-  String title;
-  String category;
-  String content;
-  String link;
-  double latitude;
-  double longitude;
-  int counterread;
-  String images01;
-  String images02;
-  String images03;
-  String images04;
-  int favorite;
-  int save;
-  int comments;
-  int share;
+  int? iduser;
+  String? username;
+  String? statuscontent;
+  int? idcontent;
+  String? dateContent;
+  String? timeContent;
+  String? title;
+  String? category;
+  String? content;
+  String? link;
+  double? latitude;
+  double? longitude;
+  int? counterread;
+  String? images01;
+  String? images02;
+  String? images03;
+  String? images04;
+  int? favorite;
+  int? save;
+  int? comments;
+  int? share;
 
   ContentModel({
     this.iduser,

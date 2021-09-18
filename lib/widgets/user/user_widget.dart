@@ -12,8 +12,8 @@ class UserWidget extends StatefulWidget {
 
 class _UserWidgetState extends State<UserWidget> {
   List<AllUsers> users = [];
-  String selected;
-  bool state;
+  String? selected;
+  bool? state;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class _UserWidgetState extends State<UserWidget> {
             return ListView.builder(
                 shrinkWrap: true,
                 physics: BouncingScrollPhysics(),
-                itemCount: snapshot.data.length,
+                itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
-                  AllUsers user = snapshot.data[index];
+                  AllUsers user = snapshot.data![index];
 
                   return ExpansionPanelList(
                     elevation: 1,
@@ -54,7 +54,7 @@ class _UserWidgetState extends State<UserWidget> {
                                           color: Colors.green.shade600,
                                         ),
                                         child: Text(
-                                          user.status.toLowerCase(),
+                                          user.status!.toLowerCase(),
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       )
@@ -70,7 +70,7 @@ class _UserWidgetState extends State<UserWidget> {
                                           color: Colors.red.shade700,
                                         ),
                                         child: Text(
-                                          user.status.toLowerCase(),
+                                          user.status!.toLowerCase(),
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ),
@@ -82,7 +82,7 @@ class _UserWidgetState extends State<UserWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        user.username,
+                                        user.username!,
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 16,
@@ -140,7 +140,7 @@ class _UserWidgetState extends State<UserWidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      user.email,
+                                      user.email!,
                                     ),
                                     SizedBox(height: 5),
                                     // Text('Created : ' + user.createdate),

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:ifgpadmin/models/report_model.dart';
 
 class APIReport {
-  static Future<List<ReportModel>> getReport() async {
+  static Future<List<ReportModel>?> getReport() async {
     final url =
         Uri.parse('http://35.213.159.134/reportshowall.php?reportshowall');
 

@@ -9,9 +9,9 @@ import 'package:ifgpadmin/widgets/comment/comment_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ArticleScreen extends StatefulWidget {
-  final MyContentModel myContentModel;
+  final MyContentModel? myContentModel;
 
-  const ArticleScreen({Key key, this.myContentModel}) : super(key: key);
+  const ArticleScreen({Key? key, this.myContentModel}) : super(key: key);
 
   @override
   _ArticleScreenState createState() => _ArticleScreenState();
@@ -33,7 +33,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final mycontent = widget.myContentModel;
+    final mycontent = widget.myContentModel!;
 
     return Scaffold(
       appBar: AppBar(
@@ -61,14 +61,14 @@ class _ArticleScreenState extends State<ArticleScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        mycontent.datecontent,
+                        mycontent.datecontent!,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       Text(
-                        mycontent.username,
+                        mycontent.username!,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 13,
@@ -86,7 +86,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                           ),
                         ),
                         child: Text(
-                          mycontent.category.toLowerCase(),
+                          mycontent.category!.toLowerCase(),
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 13,
@@ -102,7 +102,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 Container(
                   padding: EdgeInsets.all(21.0),
                   child: Text(
-                    mycontent.title,
+                    mycontent.title!,
                     style: TextStyle(fontFamily: 'Kanit', fontSize: 24),
                   ),
                 ),
@@ -115,7 +115,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                 Container(
                   padding: EdgeInsets.all(21.0),
                   child: Text(
-                    mycontent.content,
+                    mycontent.content!,
                     style: TextStyle(color: Colors.black, fontSize: 16),
                   ),
                 ),
@@ -157,7 +157,7 @@ class _ArticleScreenState extends State<ArticleScreen> {
                           ? Text('')
                           : ElevatedButton(
                               onPressed: () {
-                                _launchURL(mycontent.link);
+                                _launchURL(mycontent.link!);
                               },
                               child: Icon(
                                 CupertinoIcons.play_fill,

@@ -8,15 +8,15 @@ class CategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: APICategory.getCategory(),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot<List<CategoryModel>> snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               physics: BouncingScrollPhysics(),
-              itemCount: snapshot.data.length,
+              itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-                CategoryModel category = snapshot.data[index];
+                CategoryModel category = snapshot.data![index];
 
                 return Container(
                   padding: EdgeInsets.only(left: 21, right: 21),
@@ -42,7 +42,7 @@ class CategoryWidget extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text(
-                                    category.name,
+                                    category.name!,
                                     style: TextStyle(fontSize: 20),
                                   ),
                                   SizedBox(width: 4),

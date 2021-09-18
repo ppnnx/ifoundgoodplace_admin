@@ -1,7 +1,7 @@
 class CategoryModel {
-  int id;
-  String name;
-  int total;
+  int? id;
+  String? name;
+  int? total;
 
   CategoryModel({this.id, this.name, this.total});
 

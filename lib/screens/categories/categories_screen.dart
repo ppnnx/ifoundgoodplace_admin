@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ifgpadmin/widgets/category/category_top_widget.dart';
 import 'package:ifgpadmin/widgets/category/category_widget.dart';
 
-class CatergoryScreen extends StatelessWidget {
+class CatergoryScreen extends StatefulWidget {
+  @override
+  _CatergoryScreenState createState() => _CatergoryScreenState();
+}
+
+class _CatergoryScreenState extends State<CatergoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
