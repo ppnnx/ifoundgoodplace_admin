@@ -32,39 +32,43 @@ class AllContentScreen extends StatelessWidget {
       body: ListView(
         children: [
           FutureBuilder(
-              future: TrendingAPI.getTrendingContent(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<ContentModel>> snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (BuildContext _, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DetailScreen(
-                                          contentModel: snapshot.data![index],
-                                        )));
-                          },
-                          child: FullChartWidget(
-                            rank: index + 1,
-                            data: snapshot.data![index],
+            future: TrendingAPI.getTrendingContent(),
+            builder: (BuildContext context,
+                AsyncSnapshot<List<ContentModel>> snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (BuildContext _, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailScreen(
+                              contentModel: snapshot.data![index],
+                            ),
                           ),
                         );
-                      });
-                }
-
-                return Container(
-                  margin: EdgeInsets.all(21.0),
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                      },
+                      child: FullChartWidget(
+                        rank: index + 1,
+                        data: snapshot.data![index],
+                      ),
+                    );
+                  },
                 );
-              }),
+              }
+
+              return Container(
+                margin: EdgeInsets.all(21.0),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
@@ -101,89 +105,103 @@ class FullChartWidget extends StatelessWidget {
           ),
           SizedBox(width: 12),
           Expanded(
-              flex: 5,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                    decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(15.0)),
-                    child: Text(
-                      data!.category!,
-                      style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white),
+            flex: 5,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 5,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  child: Text(
+                    data!.category!,
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 7),
-                  Text(
-                    data!.title!,
-                    style: TextStyle(color: Colors.black, fontSize: 14),
+                ),
+                SizedBox(height: 7),
+                Text(
+                  data!.title!,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
                   ),
-                  SizedBox(height: 7),
-                  Text(
-                    data!.username!,
-                    style: TextStyle(
+                ),
+                SizedBox(height: 7),
+                Text(
+                  data!.username!,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Row(
+                  children: [
+                    Icon(
+                      CupertinoIcons.book,
+                      color: Colors.black,
+                      size: 16,
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      data!.counterread.toString(),
+                      style: TextStyle(
                         color: Colors.black,
                         fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic),
-                  ),
-                  SizedBox(height: 6),
-                  Row(
-                    children: [
-                      Icon(
-                        CupertinoIcons.book,
-                        color: Colors.black,
-                        size: 16,
                       ),
-                      SizedBox(width: 8),
-                      Text(
-                        data!.counterread.toString(),
-                        style: TextStyle(color: Colors.black, fontSize: 12),
-                      ),
-                    ],
-                  ),
-                ],
-              )),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
           SizedBox(width: 18),
           Expanded(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ClipRRect(
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          'http://35.213.159.134/uploadimages/${data!.images01}',
-                      height: 80,
-                      width: 80,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                      errorWidget: (context, url, error) {
-                        return Container(
-                          height: 80,
-                          width: 80,
-                          color: Colors.black12,
-                          child: Icon(
-                            Icons.error,
-                            color: Colors.red,
-                          ),
-                        );
-                      },
-                    ),
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        'http://35.213.159.134/uploadimages/${data!.images01}',
+                    height: 80,
+                    width: 80,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                    errorWidget: (context, url, error) {
+                      return Container(
+                        height: 80,
+                        width: 80,
+                        color: Colors.black12,
+                        child: Icon(
+                          Icons.error,
+                          color: Colors.red,
+                        ),
+                      );
+                    },
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

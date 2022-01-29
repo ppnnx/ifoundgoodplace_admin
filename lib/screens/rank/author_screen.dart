@@ -30,29 +30,36 @@ class AuthorScreen extends StatelessWidget {
       body: ListView(
         children: [
           FutureBuilder(
-              future: AuthorTrendingAPI.getTrendingAuthor(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<AuthorTrendingModel>?> snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (BuildContext _, int index) {
-                        return AuthorChartWidget(
-                          rank: index + 1,
-                          data: snapshot.data![index],
-                        );
-                      });
-                }
-
-                return Container(
-                  margin: EdgeInsets.all(21.0),
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+            future: AuthorTrendingAPI.getTrendingAuthor(),
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<List<AuthorTrendingModel>?> snapshot,
+            ) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (
+                    BuildContext _,
+                    int index,
+                  ) {
+                    return AuthorChartWidget(
+                      rank: index + 1,
+                      data: snapshot.data![index],
+                    );
+                  },
                 );
-              }),
+              }
+
+              return Container(
+                margin: EdgeInsets.all(21.0),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
@@ -71,8 +78,16 @@ class AuthorChartWidget extends StatelessWidget {
       height: 120,
       width: 375,
       color: Colors.white,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      padding: EdgeInsets.only(left: 32, right: 20, top: 10, bottom: 16),
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 5,
+      ),
+      padding: EdgeInsets.only(
+        left: 32,
+        right: 20,
+        top: 10,
+        bottom: 16,
+      ),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -81,9 +96,10 @@ class AuthorChartWidget extends StatelessWidget {
               child: Text(
                 '$rank',
                 style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.black,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -125,37 +141,38 @@ class AuthorChartWidget extends StatelessWidget {
                 ],
               )),
           Expanded(
-              flex: 1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10000.0),
-                    child: CachedNetworkImage(
-                      imageUrl: 'http://35.213.159.134/avatar/${data!.image}',
-                      width: 70,
-                      height: 70,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                      errorWidget: (context, url, error) {
-                        return CircleAvatar(
-                          radius: 35,
-                          backgroundColor: Colors.black12,
-                          child: Icon(
-                            Icons.error,
-                            color: Colors.red,
-                          ),
-                        );
-                      },
-                    ),
+            flex: 1,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10000.0),
+                  child: CachedNetworkImage(
+                    imageUrl: 'http://35.213.159.134/avatar/${data!.image}',
+                    width: 70,
+                    height: 70,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                    errorWidget: (context, url, error) {
+                      return CircleAvatar(
+                        radius: 35,
+                        backgroundColor: Colors.black12,
+                        child: Icon(
+                          Icons.error,
+                          color: Colors.red,
+                        ),
+                      );
+                    },
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

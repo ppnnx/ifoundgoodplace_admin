@@ -23,7 +23,8 @@ class _ByCategoryScreenState extends State<ByCategoryScreen> {
   Future<List<ContentModel>?> getContents() async {
     try {
       final url = Uri.parse(
-          'http://35.213.159.134/rankingbycategory.php?rankbycategory=${widget.idcategory}');
+        'http://35.213.159.134/rankingbycategory.php?rankbycategory=${widget.idcategory}',
+      );
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -63,37 +64,41 @@ class _ByCategoryScreenState extends State<ByCategoryScreen> {
         child: ListView(
           children: [
             FutureBuilder(
-                future: getContents(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<ContentModel>?> snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (BuildContext _, int index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DetailScreen(
-                                            contentModel: snapshot.data![index],
-                                          )));
-                            },
-                            child: ChartWidget(
-                              rank: index + 1,
-                              data: snapshot.data![index],
+              future: getContents(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<ContentModel>?> snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext _, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailScreen(
+                                contentModel: snapshot.data![index],
+                              ),
                             ),
                           );
-                        });
-                  }
-                  return Container(
-                    padding: EdgeInsets.all(30.0),
-                    child: Center(
-                      child: Text("No Ranking."),
-                    ),
+                        },
+                        child: ChartWidget(
+                          rank: index + 1,
+                          data: snapshot.data![index],
+                        ),
+                      );
+                    },
                   );
-                }),
+                }
+                return Container(
+                  padding: EdgeInsets.all(30.0),
+                  child: Center(
+                    child: Text("No Ranking."),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -113,8 +118,16 @@ class ChartWidget extends StatelessWidget {
       height: 150,
       width: 375,
       color: Colors.white,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      padding: EdgeInsets.only(left: 22, right: 16, top: 10, bottom: 16),
+      margin: EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 4,
+      ),
+      padding: EdgeInsets.only(
+        left: 22,
+        right: 16,
+        top: 10,
+        bottom: 16,
+      ),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -123,9 +136,10 @@ class ChartWidget extends StatelessWidget {
               child: Text(
                 '$rank',
                 style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.black,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -158,10 +172,11 @@ class ChartWidget extends StatelessWidget {
                   Text(
                     data!.username!,
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.italic),
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                   SizedBox(height: 6),
                   Row(
@@ -174,7 +189,10 @@ class ChartWidget extends StatelessWidget {
                       SizedBox(width: 8),
                       Text(
                         data!.counterread.toString(),
-                        style: TextStyle(color: Colors.black, fontSize: 12),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                        ),
                       ),
                     ],
                   ),
@@ -182,38 +200,39 @@ class ChartWidget extends StatelessWidget {
               )),
           SizedBox(width: 18),
           Expanded(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ClipRRect(
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          'http://35.213.159.134/uploadimages/${data!.images01}',
-                      height: 80,
-                      width: 80,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                      errorWidget: (context, url, error) {
-                        return Container(
-                          height: 80,
-                          width: 80,
-                          color: Colors.black12,
-                          child: Icon(
-                            Icons.error,
-                            color: Colors.red,
-                          ),
-                        );
-                      },
-                    ),
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        'http://35.213.159.134/uploadimages/${data!.images01}',
+                    height: 80,
+                    width: 80,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                    errorWidget: (context, url, error) {
+                      return Container(
+                        height: 80,
+                        width: 80,
+                        color: Colors.black12,
+                        child: Icon(
+                          Icons.error,
+                          color: Colors.red,
+                        ),
+                      );
+                    },
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
